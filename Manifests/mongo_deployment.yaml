@@ -14,6 +14,10 @@ spec:
    labels:
         app: mongo
   spec:
+   volumes:
+   - name: mongodb-data
+     persistentVolumeClaim:
+        claimName: mongodb-pvc
    containers:
    - image: mongo
      name: mongodb
@@ -23,7 +27,7 @@ spec:
      ports:
      - containerPort: 27017
        protocol: TCP
-   volumes:
-   - name: mongodb-data
-     persistentVolumeClaim:
-       claimName: mongo-pvc
+#   volumes:
+#   - name: mongodb-data
+#      persistentVolumeClaim:
+#       claimName: mongo-pvc
