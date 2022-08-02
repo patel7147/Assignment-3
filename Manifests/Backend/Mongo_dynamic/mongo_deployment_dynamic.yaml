@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb-deployment
+  name: mongo-deployment-dynamic
   labels:
     app: mongo
 spec: 
@@ -14,10 +14,6 @@ spec:
    labels:
         app: mongo
   spec:
-   volumes:
-   - name: mongodb-data
-     persistentVolumeClaim:
-        claimName: mongodb-pvc
    containers:
    - image: mongo
      name: mongodb
@@ -27,7 +23,7 @@ spec:
      ports:
      - containerPort: 27017
        protocol: TCP
-#   volumes:
-#   - name: mongodb-data
-#      persistentVolumeClaim:
-#       claimName: mongo-pvc
+   volumes:
+   - name: mongodb-data
+     persistentVolumeClaim:
+      claimName: mongo-pvc
