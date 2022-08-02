@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  labels:
+    app: mongo
+spec: 
+ selector:
+  matchLabels:
+    app: mongo
+ replicas: 1
+ template:
+  metadata:
+   labels:
+        app: mongo
+  spec:
+   volumes:
+   - name: mongodb-data
+     persistentVolumeClaim:
+        claimName: mongodb-pvc
+   containers:
+   - image: mongo
+     name: mongodb
+     volumeMounts:
+     - name: mongodb-data
+       mountPath: /data/db
+     ports:
+     - containerPort: 27017
+       protocol: TCP
+#   volumes:
+#   - name: mongodb-data
+#      persistentVolumeClaim:
+#       claimName: mongo-pvc
